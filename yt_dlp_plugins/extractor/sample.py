@@ -19,6 +19,7 @@ from yt_dlp.extractor.common import InfoExtractor
 class SamplePluginIE(InfoExtractor):
     _WORKING = False
 #    IE_DESC = False
+    IE_NAME = 'sample'
     _VALID_URL = r'^sampleplugin:'
 
     def _real_extract(self, url):
@@ -39,4 +40,4 @@ class SamplePluginIE(InfoExtractor):
                 (r'<title[^>]*>([^<]+?)</title>',
                  r'<meta\s+property="og:title"\s+content="([^"]+)"\s*/>',
                  r"<meta\s+property='og:title'\s+content='([^']+)'\s*/>"),
-                webpage,'title', fatal=False)
+                webpage,'title', default=IE_NAME+' '+video_id, fatal=False, flags=re.IGNORECASE)
