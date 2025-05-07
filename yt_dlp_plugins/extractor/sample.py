@@ -29,7 +29,7 @@ class SamplePluginIE(InfoExtractor):
 #        self._downloader.to_stderr('error message')
 #        self._downloader.to_stdout('normal message')
         self.write_debug('debug message')# it's output if '--verbose' id used.
-        self.report_warning(f'Unable to ....; {stderr.strip()}') # if warning
+#        self.report_warning(f'Unable to ....; {stderr.strip()}') # if warning
 #        cookiefile = self._downloader.params.get('cookiefile')
         for ck in self.cookiejar:
             print(f"Name: {ck.name}, Value: {ck.value}, Domain: {ck.domain}, Path: {ck.path}
@@ -41,3 +41,4 @@ class SamplePluginIE(InfoExtractor):
                  r'<meta\s+property="og:title"\s+content="([^"]+)"\s*/>',
                  r"<meta\s+property='og:title'\s+content='([^']+)'\s*/>"),
                 webpage,'title', default=self.IE_NAME+' '+video_id, fatal=False, flags=re.IGNORECASE)
+        self.to_screen('Title: "%s"' % title)
