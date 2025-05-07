@@ -25,9 +25,18 @@ class SamplePluginIE(InfoExtractor):
         self.to_screen('URL "%s" successfully captured' % url)
 #        print('error message.', file=sys.stderr) # not recommend
 #        sys.stderr.write('error message\n') # not recommend
+#        self._downloader.to_stderr('error message')
+#        self._downloader.to_stdout('normal message')
         self.write_debug('debug message')# it's output if '--verbose' id used.
+        self.report_warning(f'Unable to ....; {stderr.strip()}') # if warning
 #        cookiefile = self._downloader.params.get('cookiefile')
         for ck in self.cookiejar:
             print(f"Name: {ck.name}, Value: {ck.value}, Domain: {ck.domain}, Path: {ck.path}
 , Expires: {ck.expires}")
-        
+        video_id = self._match_id(url)
+        webpage = self._download_webpage(url, video_id)
+        title = self._html_search_regex(
+                (r'<title[^>]*>([^<]+?)</title>',
+                 r'<meta\s+property="og:title"\s+content="([^"]+)"\s*/>',
+                 r"<meta\s+property='og:title'\s+content='([^']+)'\s*/>"),
+                webpage,'title', fatal=False)
