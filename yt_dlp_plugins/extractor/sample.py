@@ -37,7 +37,7 @@ class SamplePluginIE(InfoExtractor):
         video_id = self._match_id(url)
         webpage = self._download_webpage(url, video_id)
         title = self._html_search_regex(
-                (r'<title[^>]*>([^<]+?)</title>',
+                (r'''<title[^>]*>([^<]+?)</title>''',
                  r'<meta\s+property="og:title"\s+content="([^"]+)"\s*/>',
                  r"<meta\s+property='og:title'\s+content='([^']+)'\s*/>"),
                 webpage,'title', default=self.IE_NAME+' '+video_id, fatal=False, flags=re.IGNORECASE)
