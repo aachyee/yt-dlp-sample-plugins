@@ -2,6 +2,9 @@
 
 # from __future__ import unicode_literals
 
+# need sys if output to stderr.
+import sys
+
 # ⚠ Don't use relative imports
 from yt_dlp.extractor.common import InfoExtractor
 
@@ -20,3 +23,11 @@ class SamplePluginIE(InfoExtractor):
 
     def _real_extract(self, url):
         self.to_screen('URL "%s" successfully captured' % url)
+#        print('error message.', file=sys.stderr) # not recommend
+#        sys.stderr.write('error message\n') # not recommend
+        self.write_debug('debug message')# it's output if '--verbose' id used.
+#        cookiefile = self._downloader.params.get('cookiefile')
+        for ck in self.cookiejar:
+            print(f"Name: {ck.name}, Value: {ck.value}, Domain: {ck.domain}, Path: {ck.path}
+, Expires: {ck.expires}")
+        
