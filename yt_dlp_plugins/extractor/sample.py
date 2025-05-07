@@ -32,7 +32,7 @@ class SamplePluginIE(InfoExtractor):
 #        self.report_warning(f'Unable to ....; {stderr.strip()}') # if warning
 #        cookiefile = self._downloader.params.get('cookiefile')
         for ck in self.cookiejar:
-            print(f"Name: {ck.name}, Value: {ck.value}, Domain: {ck.domain}, Path: {ck.path}
+            self.write_debug(f"Name: {ck.name}, Value: {ck.value}, Domain: {ck.domain}, Path: {ck.path}
 , Expires: {ck.expires}")
         video_id = self._match_id(url)
         webpage = self._download_webpage(url, video_id)
